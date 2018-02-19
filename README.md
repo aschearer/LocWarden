@@ -162,6 +162,35 @@ Every format arg (surrounded by `{[` and `]}`) corresponds with a string id in m
 
 Run LocWarden and open the newly generated file `SteamPageLoc.txt`. In it you will find the above template with localized text replacing each format arg and repeated once per a language. Using this file, we can quickly cut and paste into Steam to localize our storefront!
 
+### Discovering Plugins
+At this point you may have everything you need to localize your game. But perhaps you want to know what other plugins are available? To discover what plugins are present in a DLL is easy. Just run Loc Warden as follows:
+
+    .\LocWarden.Console.exe -d .\Plugins\LocWarden.Plugins\LocWarden.Plugins.dll
+
+If the assembly contains Loc Warden plugins then their documentation will be printed to the console. For example the above yields:
+
+    Documentation for plugins in: .\Plugins\LocWarden.Plugins\LocWarden.Plugins.dll
+
+    Excel Importer
+            Imports languages stored as Excel files.
+
+    Templated Key Exporter
+            Takes a template file and exports a copy per language with parameters replaced with localized text.
+            Parameters:
+                    templateFile (string, required): File with keys in {[format args]}.
+                    outputFile (string, required): File to write results to.
+
+    Key Exporter
+            Exports designated keys as columns with each language as a row.
+            Parameters:
+                    keysListFile (string, required): File containing a list of keys, one per a line.
+                    outputFile (string, required): File to write results to.
+
+    Csv Exporter
+            Exports languages in a single CSV.
+            Parameters:
+                    outputFile (string, required): File to write CSV data to.
+
 ### Writing a Plugin
 This section is forthcoming. Thank you for your patience.
 
