@@ -44,7 +44,7 @@ Start by navigating to the project folder and creating a new file titled `Settin
 
 *Note: Only one language can be master. This language is treated as the source of truth during validation.*
 
-Copy the `Loc` folder containing your loc files into the folder.
+Copy the `Loc` folder containing your loc files into the project.
 
 Next open PowerShell and run:
 
@@ -137,7 +137,7 @@ Let's get started. First, add a new plugin to the settings:
             templateFile: SteamTemplate.txt
             outputFile: SteamPageLoc.txt
 
-Note that this time a `templateFile` is being defined. Create `SteamTemplate.txt` and open it in your editor. Paste the following then save and close:
+Note that this time a `templateFile` is being specified. Create `SteamTemplate.txt` and open it in your editor. Paste the following then save and close:
 
     [h2]{[Developer's Note Header]}[/h2]
     {[Developer's Note]}
