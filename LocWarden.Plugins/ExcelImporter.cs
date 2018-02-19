@@ -17,6 +17,7 @@ namespace LocWarden.Plugins
     ///   * For translated languages, the fourth column is the value text.
     ///   * Empty rows should be skipped.
     /// </remarks>
+    [Plugin(name: "Excel Importer", description: "Imports languages stored as Excel files.")]
     public class ExcelImporter : ILocalizationImporter
     {
         public LocalizedLanguage Import(ILanguageDefinition languageDefinition, IPluginConfig config)

@@ -17,6 +17,9 @@ namespace LocWarden.Plugins
     ///     keysListFile: path to a file containing a list of keys, one per a line.
     ///     outputFile: path to a file to write the results to.
     /// </remarks>
+    [Plugin(name: "Key Exporter", description: "Exports designated keys as columns with each language as a row.")]
+    [PluginParameter(name: "keysListFile", description: "File containing a list of keys, one per a line.")]
+    [PluginParameter(name: "outputFile", description: "File to write results to.")]
     public class KeyExporter : ILocalizationExporter
     {
         public async Task<LocalizationError> Export(

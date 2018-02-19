@@ -22,6 +22,9 @@ namespace LocWarden.Plugins
     ///   templateFile: path to a file with keys in {[format args]}.
     ///   outputFile: path to a file to write results to.
     /// </remarks>
+    [Plugin(name: "Templated Key Exporter", description: "Takes a template file and exports a copy per language with parameters replaced with localized text.")]
+    [PluginParameter(name: "templateFile", description: "File with keys in {[format args]}.")]
+    [PluginParameter(name: "outputFile", description: "File to write results to.")]
     public class TemplatedKeyExporter : ILocalizationExporter
     {
         public async Task<LocalizationError> Export(

@@ -13,6 +13,8 @@ namespace LocWarden.Plugins
     /// Exports a CSV file containing the localization data in a format
     /// suitable for import by the I2 plug-in for Unity.
     /// </summary>
+    [Plugin(name: "Csv Exporter", description: "Exports languages in a single CSV.")]
+    [PluginParameter(name: "outputFile", description: "File to write CSV data to.")]
     public class CsvExporter : ILocalizationExporter
     {
         public async Task<LocalizationError> Export(

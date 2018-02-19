@@ -4,6 +4,7 @@ using NDesk.Options;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -18,10 +19,12 @@ namespace LocWarden.Console
         static void Main(string[] args)
         {
             string configFile = string.Empty;
+            string discoverFile = string.Empty;
             bool showHelp = false;
             var options = new OptionSet()
             {
                 { "c|config=", "the configuration file.", v => { configFile = v; } },
+                { "d|discover=", "show description of plugins in file.", v => { discoverFile = v; } },
                 { "h|help", "show this message and exit.", v => { showHelp = !string.IsNullOrEmpty(v); } },
             };
 
@@ -30,6 +33,46 @@ namespace LocWarden.Console
             if (showHelp)
             {
                 options.WriteOptionDescriptions(System.Console.Out);
+                return;
+            }
+
+            if (!string.IsNullOrEmpty(discoverFile))
+            {
+                try
+                {
+                    var assembly = Assembly.LoadFrom(discoverFile);
+
+                    System.Console.WriteLine("Documentation for plugins in: {0}", discoverFile);
+                    System.Console.WriteLine();
+
+                    var importerType = typeof(ILocalizationImporter);
+                    var importerTypes = assembly.GetTypes().Where(t => importerType.IsAssignableFrom(t));
+
+                    if (importerTypes.Any())
+                    {
+                        foreach (var type in importerTypes)
+                        {
+                            PrintPluginDescription(type);
+                        }
+                    }
+
+                    var exporterType = typeof(ILocalizationExporter);
+                    var exporterTypes = assembly.GetTypes().Where(t => exporterType.IsAssignableFrom(t));
+
+                    if (exporterTypes.Any())
+                    {
+                        foreach (var type in exporterTypes)
+                        {
+                            PrintPluginDescription(type);
+                        }
+                    }
+                }
+                catch
+                {
+                    System.Console.Write("Could not process assembly for plugin discovery.");
+                    Environment.Exit(2);
+                }
+
                 return;
             }
 
@@ -264,6 +307,34 @@ namespace LocWarden.Console
 
             System.Console.WriteLine("Press any key to continue...");
             System.Console.ReadKey(true);
+        }
+
+        private static void PrintPluginDescription(Type type)
+        {
+            var pluginAttribute = type.GetCustomAttribute<PluginAttribute>();
+            if (pluginAttribute != null)
+            {
+                System.Console.WriteLine("{0}", pluginAttribute.Name);
+                System.Console.WriteLine("\t{0}", pluginAttribute.Description);
+                var parameters = type.GetCustomAttributes<PluginParameterAttribute>();
+                if (parameters.Any())
+                {
+                    System.Console.WriteLine("\tParameters:");
+                }
+
+                foreach (var parameter in parameters)
+                {
+
+                    System.Console.WriteLine(
+                        "\t\t{0} ({3}, {2}): {1}",
+                        parameter.Name,
+                        parameter.Description,
+                        parameter.IsOptional ? "optional" : "required",
+                        parameter.Type);
+                }
+            }
+
+            System.Console.WriteLine();
         }
 
         private static void CompareLanguages(LocalizedLanguage master, LocalizedLanguage language)

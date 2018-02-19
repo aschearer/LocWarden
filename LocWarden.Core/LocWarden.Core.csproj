@@ -59,6 +59,8 @@
     <Compile Include="LocalizedLanguage.cs" />
     <Compile Include="ILocalizedText.cs" />
     <Compile Include="LocalizedText.cs" />
+    <Compile Include="PluginParameterAttribute.cs" />
+    <Compile Include="PluginAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
