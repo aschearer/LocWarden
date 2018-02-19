@@ -15,6 +15,7 @@ assembly_info:
   assembly_informational_version: '{version}'
 before_build:
 - ps: nuget restore LocWarden.sln
+image: Visual Studio 2017
 build:
   verbosity: minimal
   project: LocWarden.sln
