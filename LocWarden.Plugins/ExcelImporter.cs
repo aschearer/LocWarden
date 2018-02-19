@@ -18,6 +18,11 @@ namespace LocWarden.Plugins
     ///   * Empty rows should be skipped.
     /// </remarks>
     [Plugin(name: "Excel Importer", description: "Imports languages stored as Excel files.")]
+    [PluginParameter(name: "numberOfHeaderRows", description: "How many rows should be skipped from the beginning. Default is 1.", isOptional: true, type: "number")]
+    [PluginParameter(name: "keyColumn", description: "Column index for loc key. Default is 0.", isOptional: true, type: "number")]
+    [PluginParameter(name: "descriptionColumn", description: "Column index for loc description. Default is 1.", isOptional: true, type: "number")]
+    [PluginParameter(name: "valueColumnForMaster", description: "Column index for loc value in master language. Default is 2.", isOptional: true, type: "number")]
+    [PluginParameter(name: "valueColumnForNormal", description: "Column index for loc value in non-master languages. Default is 3.", isOptional: true, type: "number")]
     public class ExcelImporter : ILocalizationImporter
     {
         public LocalizedLanguage Import(ILanguageDefinition languageDefinition, IPluginConfig config)
@@ -25,14 +30,19 @@ namespace LocWarden.Plugins
             var language = new LocalizedLanguage(languageDefinition);
             var workbook = new XLWorkbook(language.Path);
             var worksheet = workbook.Worksheet(1);
-            bool isHeaderRow = true;
+            int headerRowsRemaining = config.GetInt("numberOfHeaderRows", 1);
+            int keyColumn = 1 + config.GetInt("keyColumn", 0);
+            int descriptionColumn = 1 + config.GetInt("descriptionColumn", 1);
+            int valueMasterColumn = 1 + config.GetInt("valueColumnForMaster", 2);
+            int valueNormalColumn = 1 + config.GetInt("valueColumnForNormal", 3);
+
             bool isMasterLanguage = language.IsMasterLanguage;
             int rowNumber = 1;
             foreach (var row in worksheet.Rows())
             {
-                if (isHeaderRow)
+                if (headerRowsRemaining > 0)
                 {
-                    isHeaderRow = false;
+                    headerRowsRemaining--;
 
                     rowNumber++;
                     continue;
@@ -44,11 +54,11 @@ namespace LocWarden.Plugins
                     continue;
                 }
 
-                int valueColumn = language.IsMasterLanguage ? 3 : 4;
+                int valueColumn = language.IsMasterLanguage ? valueMasterColumn : valueNormalColumn;
 
                 language.AddText(
-                    key: row.Cell(1).Value.ToString(),
-                    description: row.Cell(2).Value.ToString(),
+                    key: row.Cell(keyColumn).Value.ToString(),
+                    description: row.Cell(descriptionColumn).Value.ToString(),
                     value: row.Cell(valueColumn).Value.ToString(),
                     rowNumber: rowNumber);
 

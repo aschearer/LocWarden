@@ -6,5 +6,7 @@
     public interface IPluginConfig
     {
         string GetString(string setting);
+
+        int GetInt(string setting, int defaultValue);
     }
 }

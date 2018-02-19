@@ -173,6 +173,12 @@ If the assembly contains Loc Warden plugins then their documentation will be pri
 
     Excel Importer
             Imports languages stored as Excel files.
+            Parameters:
+                    numberOfHeaderRows (number, optional): How many rows should be skipped from the beginning. Default is 1.
+                    keyColumn (number, optional): Column index for loc key. Default is 0.
+                    descriptionColumn (number, optional): Column index for loc description. Default is 1.
+                    valueColumnForMaster (number, optional): Column index for loc value in master language. Default is 2.
+                    valueColumnForNormal (number, optional): Column index for loc value in non-master languages. Default is 3.
 
     Templated Key Exporter
             Takes a template file and exports a copy per language with parameters replaced with localized text.
