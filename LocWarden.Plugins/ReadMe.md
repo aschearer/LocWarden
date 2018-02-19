@@ -1,0 +1,1 @@
+﻿This project contains a set of plug-ins which are likely useful for other projects. It also serves as an example for others who wish to create their own plugins.
