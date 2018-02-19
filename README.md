@@ -26,6 +26,8 @@ Download and unzip the latest build here:
 
 [LocWarden.zip][1]
 
+Navigate to the `Plugins\LocWarden.Plugins`, open Explorer, right-click on `LocWarden.Plugins.dll`, select "Properties", and check the security checkbox at the bottom labled "Unblock". This will allow LocWarden to invoke plugins in this DLL.
+
 ### Validating Translations
 Let's start by using LocWarden to validate our translations. When receiving loc files it's not uncommon to find missing strings or missing format args. Using LocWarden, we can quickly and automatically verify that our translations are sane. If not we can work with the translator to fix things before they reach the game.
 
