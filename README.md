@@ -140,7 +140,6 @@ Let's get started. First, add a new plugin to the settings:
 Note that this time a `templateFile` is being defined. Create `SteamTemplate.txt` and open it in your editor. Paste the following then save and close:
 
     [h2]{[Developer's Note Header]}[/h2]
-
     {[Developer's Note]}
 
     [h2]{[Gameplay Header]}[/h2]
@@ -163,6 +162,9 @@ Every format arg (surrounded by `{[` and `]}`) corresponds with a string id in m
 
 Run LocWarden and open the newly generated file `SteamPageLoc.txt`. In it you will find the above template with localized text replacing each format arg and repeated once per a language. Using this file, we can quickly cut and paste into Steam to localize our storefront!
 
+### Writing a Plugin
+This section is forthcoming. Thank you for your patience.
+
 ## Contributing
 The following is intended for those who would like to change the tool. If you simply want to run the tool refer to the Quick Start section above.
 
@@ -174,4 +176,4 @@ The following is intended for those who would like to change the tool. If you si
 
 The generated exe and dependencies will be automatically copied to `Publish/LocWarden`. Use that directory to test changes. It also serves as the basis for creating new release.
 
-[1]: https://bitbucket.org/spottedzebra/unity-cloud-build-steam-uploader/downloads/UnityCloudBuildSteamUploader.zip
+[1]: https://github.com/aschearer/locwarden/releases/latest
