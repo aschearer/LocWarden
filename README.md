@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/j480tnr2401s52uo?svg=true)](https://ci.appveyor.com/project/aschearer/locwarden)
+
 # Loc Warden
 I think it's important to localize my games. Localizing provides the best experience for my players overseas, and, for a relatively low cost, it makes my work available to a much larger audience. By translating my games into a handful of languages I can easily double my addressable market!
 
