@@ -20,7 +20,7 @@ build:
   verbosity: minimal
   project: LocWarden.sln
 after_build:
-- cmd: 7z a LocWarden.zip "%APPVEYOR_BUILD_FOLDER%\Publish\*"
+- cmd: 7z a LocWarden.zip "%APPVEYOR_BUILD_FOLDER%\Publish\LocWarden\*"
 artifacts:
 - path: LocWarden.zip
   name: LocWarden.zip
