@@ -8,5 +8,7 @@
         string GetString(string setting);
 
         int GetInt(string setting, int defaultValue);
+
+        bool GetBool(string setting, bool defaultValue);
     }
 }

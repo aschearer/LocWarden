@@ -25,6 +25,20 @@ namespace LocWarden.Core
             return result;
         }
 
+        public bool GetBool(string setting, bool defaultValue)
+        {
+            bool result = defaultValue;
+            try
+            {
+                result = bool.Parse(config[setting]);
+            }
+            catch
+            {
+            }
+
+            return result;
+        }
+
         public string GetString(string setting)
         {
             return this.config[setting];

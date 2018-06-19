@@ -119,6 +119,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CharacterExporter.cs" />
     <Compile Include="TemplatedKeyExporter.cs" />
     <Compile Include="KeyExporter.cs" />
     <Compile Include="CsvExporter.cs" />
